@@ -18,6 +18,7 @@ class GildedRose {
     
     public static void updateQuality() {
     	for(Item item : items) {
+    		
             if (!decreaseQuality(item, false)) {
             	
             	increaseQuality(item, false);
@@ -25,15 +26,14 @@ class GildedRose {
             
             decreaseSellIn(item);
             
-            if (item.sellIn < 0) {
+            if(item.sellIn >=0) continue;
             
-	            switch(item.name) {
-		            case AGED_BRIE : increaseQuality(item, false);
-		            				 break;
-		            case BACKSTAGE : item.quality = 0;
-		            				 break;
-		            default : decreaseQuality(item, false);
-	            }
+            switch(item.name) {
+	            case AGED_BRIE : increaseQuality(item, false);
+	            				 break;
+	            case BACKSTAGE : item.quality = 0;
+	            				 break;
+	            default : decreaseQuality(item, false);
             }
             
         }
@@ -44,7 +44,15 @@ class GildedRose {
              item.sellIn = item.sellIn - 1;
          }
 	}
-
+    
+    /**
+     * The decreaseQuality method is used to calculate new decreased quality of the item. 
+     * The call can be recursive(can be called several time depending on the item name)
+     * 
+     * @param item : item to update 
+     * @param isRecursiveCall : flag indicating if it is a recursive call
+     * @return true if the decrease is allowed or false otherwise
+     */
 	private static boolean decreaseQuality(Item item, boolean isRecursiveCall) {
 		
 		
@@ -58,6 +66,12 @@ class GildedRose {
     	return !item.name.equals(AGED_BRIE) && !item.name.equals(BACKSTAGE);
     }
     
+	/**
+	 * The increaseQuality is used to calculate new increased quality of the item. 
+     * The call can be recursive(can be called several time depending on the item name)
+	 * @param item : item to update 
+	 * @param isRecursiveCall : flag indicating if it is a recursive call
+	 */
     private static void increaseQuality(Item item, boolean isRecursiveCall) {
     	
     	
