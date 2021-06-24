@@ -8,6 +8,7 @@ class GildedRose {
     private static final String AGED_BRIE = "Aged Brie";
     private static final String BACKSTAGE = "Backstage passes to a TAFKAL80ETC concert";
     private static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
+    private static final String CONJURED = "Conjured";
     
     private static final String[] NOT_DECREASABLE_QUALITY_ITEMS = {AGED_BRIE, BACKSTAGE, SULFURAS};
     
@@ -17,7 +18,7 @@ class GildedRose {
     
     public static void updateQuality() {
     	for(Item item : items) {
-            if (!decreaseQuality(item)) {
+            if (!decreaseQuality(item, false)) {
             	
             	increaseQuality(item, false);
             }
@@ -31,7 +32,7 @@ class GildedRose {
 		            				 break;
 		            case BACKSTAGE : item.quality = 0;
 		            				 break;
-		            default : decreaseQuality(item);
+		            default : decreaseQuality(item, false);
 	            }
             }
             
@@ -44,12 +45,15 @@ class GildedRose {
          }
 	}
 
-	private static boolean decreaseQuality(Item item) {
+	private static boolean decreaseQuality(Item item, boolean isRecursiveCall) {
 		
 		
     	if (!Arrays.asList(NOT_DECREASABLE_QUALITY_ITEMS).contains(item.name) && item.quality > 0) {
             item.quality = item.quality - 1;
         }
+    	
+    	if(item.name.equals(CONJURED) && isRecursiveCall== false)
+    		decreaseQuality(item,true);
     	
     	return !item.name.equals(AGED_BRIE) && !item.name.equals(BACKSTAGE);
     }

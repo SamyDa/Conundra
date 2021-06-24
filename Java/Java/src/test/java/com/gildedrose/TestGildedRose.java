@@ -25,7 +25,7 @@ public class TestGildedRose {
 	@Test
 	public void testUpdateQualityAfterOneDay() {
 		Item[] resultItems = new Item[] {
-				new Item("Conjured", 4, 24),
+				new Item("Conjured", 4, 23),
 				new Item("Sulfuras, Hand of Ragnaros", 50, 61),
 				new Item("Aged Brie", 1, 41),
 				new Item("Backstage passes to a TAFKAL80ETC concert", 11, 26	),
@@ -37,7 +37,7 @@ public class TestGildedRose {
 	@Test
 	public void testUpdateQualityAfterFiveDays() {
 		Item[] resultItems = new Item[] {
-				new Item("Conjured", 0, 20),
+				new Item("Conjured", 0, 15),
 				new Item("Sulfuras, Hand of Ragnaros", 50, 61),
 				new Item("Aged Brie", -3, 48),
 				new Item("Backstage passes to a TAFKAL80ETC concert", 7, 33),
@@ -48,7 +48,7 @@ public class TestGildedRose {
 	@Test
 	public void testUpdateQualityAfterTenDays() {
 		Item[] resultItems = new Item[] {
-				new Item("Conjured", -5, 10),
+				new Item("Conjured", -5, 0),
 				new Item("Sulfuras, Hand of Ragnaros", 50, 61),
 				new Item("Aged Brie", -8, 50),
 				new Item("Backstage passes to a TAFKAL80ETC concert", 2, 46),
